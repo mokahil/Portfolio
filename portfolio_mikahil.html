@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mikahil Lamblin — Portfolio E5 BTS SIO SISR</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f9f8f6;
+    --white: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --light: #e8e6e1;
+    --accent: #2a5cff;
+    --accent-light: #eef1ff;
+    --border: #e0ddd7;
+    --radius: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249,248,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--text);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 120px 3rem 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+    min-height: 90vh;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 0.35rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s ease forwards;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s ease forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--muted);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s ease forwards;
+  }
+  .hero-right {
+    padding-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.65s ease forwards;
+  }
+  .hero-info-list {
+    list-style: none;
+    border-top: 1px solid var(--border);
+  }
+  .hero-info-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .hero-info-list li span:first-child { color: var(--muted); font-weight: 300; }
+  .hero-info-list li span:last-child { color: var(--text); font-weight: 400; text-align: right; }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: gap 0.2s;
+  }
+  .hero-cta:hover { gap: 1rem; }
+
+  /* SECTIONS */
+  .section-wrap {
+    padding: 80px 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 3rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.85;
+    max-width: 520px;
+  }
+  .skills-block-title {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .skill-tag {
+    font-size: 0.78rem;
+    font-weight: 400;
+    padding: 0.3rem 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* COMPETENCES E5 */
+  .comp-bg {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .comp-card {
+    background: var(--white);
+    padding: 2rem 1.8rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .comp-card:hover { background: var(--accent-light); }
+  .comp-card:hover .comp-arrow { opacity: 1; transform: translateX(0); }
+  .comp-code {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .comp-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+  .comp-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .comp-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: all 0.2s;
+  }
+  .comp-note {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 1.2rem;
+  }
+
+  /* PROJETS */
+  .projects-list {
+    border-top: 1px solid var(--border);
+  }
+  .project-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .project-item.visible { opacity: 1; transform: translateY(0); }
+  .project-date { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; }
+  .project-org { font-size: 0.78rem; font-weight: 500; color: var(--text); margin-bottom: 1rem; }
+  .project-comp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-comp-tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 0.2rem 0.55rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 2px;
+  }
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.6rem;
+    line-height: 1.25;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.2rem;
+    max-width: 540px;
+  }
+  .project-tasks { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .project-tasks li {
+    font-size: 0.82rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .project-tasks li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+
+  /* FORMATION */
+  .timeline { border-top: 1px solid var(--border); }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .timeline-row.visible { opacity: 1; transform: translateY(0); }
+  .timeline-year { font-size: 0.78rem; color: var(--muted); padding-top: 0.15rem; }
+  .timeline-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .timeline-sub { font-size: 0.82rem; color: var(--muted); }
+  .timeline-current {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.6rem;
+    vertical-align: middle;
+  }
+
+  /* CONTACT */
+  .contact-bg { background: var(--text); }
+  .contact-inner {
+    padding: 80px 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .contact-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--bg);
+  }
+  .contact-title em { font-style: italic; color: #8fa3ff; }
+  .contact-links { border-top: 1px solid rgba(255,255,255,0.1); }
+  .contact-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none;
+    color: var(--bg);
+    transition: color 0.2s;
+  }
+  .contact-row:hover { color: #8fa3ff; }
+  .contact-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .contact-value { font-size: 0.88rem; }
+
+  footer {
+    background: var(--text);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  footer p { font-size: 0.72rem; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 860px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 1.5rem 60px; gap: 3rem; }
+    .section-wrap { padding: 60px 1.5rem; }
+    .about-grid, .comp-grid { grid-template-columns: 1fr; }
+    .project-item, .timeline-row { grid-template-columns: 1fr; gap: 1rem; }
+    .contact-inner { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mikahil Lamblin</div>
+  <ul class="nav-links">
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#competences">Compétences E5</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#formation">Formation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <span class="hero-tag">Portfolio E5 — BTS SIO SISR</span>
+    <h1 class="hero-name">Mikahil<br><em>Lamblin</em></h1>
+    <p class="hero-desc">Étudiant en BTS SIO option SISR, déterminé et autonome, avec un ancrage solide en cybersécurité, infrastructure système et réseaux.</p>
+  </div>
+  <div class="hero-right">
+    <ul class="hero-info-list">
+      <li><span>Formation</span><span>BTS SIO SISR — 2ème année</span></li>
+      <li><span>Option</span><span>SISR</span></li>
+      <li><span>Langues</span><span>Français · Anglais (bilingue)</span></li>
+      <li><span>Disponibilité</span><span>Alternance / Stage 2026</span></li>
+    </ul>
+    <a href="#projets" class="hero-cta">Voir mes projets →</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <div class="section-divider"></div>
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Profil</h2>
+  </div>
+  <div class="about-grid reveal">
+    <p class="about-text">
+      Déterminé, sérieux et autonome, je construis mon parcours avec une vraie conviction : chaque formation traversée — du bac scientifique à une école en cybersécurité — a renforcé ma polyvalence et ma capacité à m'adapter. Aujourd'hui en BTS SIO option SISR, je m'investis pleinement dans les problématiques d'infrastructure, de sécurité et de réseaux, persuadé d'apporter une valeur réelle au sein de toute équipe technique.
+    </p>
+    <div>
+      <div class="skills-block-title">Compétences techniques</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Windows Server</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Active Directory</span>
+        <span class="skill-tag">PowerShell</span>
+        <span class="skill-tag">Cloudflare</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C / C++</span>
+        <span class="skill-tag">Réseaux TCP/IP</span>
+        <span class="skill-tag">Cybersécurité</span>
+      </div>
+      <div class="skills-block-title">Langues</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Français — natif</span>
+        <span class="skill-tag">Anglais — bilingue</span>
+        <span class="skill-tag">Espagnol — scolaire</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETENCES E5 -->
+<div class="comp-bg" id="competences">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Compétences E5</h2>
+    </div>
+    <div class="comp-grid reveal">
+      <!-- Les href pointent vers les projets associés — à adapter quand vous transmettrez les projets -->
+      <a href="#projet-1" class="comp-card">
+        <div class="comp-code">C.01</div>
+        <div class="comp-title">Gérer le patrimoine informatique</div>
+        <div class="comp-desc">Recenser, identifier et maintenir les ressources matérielles et logicielles de l'organisation.</div>
+        <span class="comp-arrow">→</span>
+      </a>
+      <a href="#projet-4" class="comp-card">
+        <div class="comp-code">C.02</div>
+        <div class="comp-title">Répondre aux incidents et demandes d'assistance</div>
+        <div class="comp-desc">Traiter les demandes utilisateurs, diagnostiquer et résoudre les incidents techniques.</div>
+        <span class="comp-arrow">→</span>
+      </a>
+      <a href="#projet-3" class="comp-card">
+        <div class="comp-code">C.03</div>
+        <div class="comp-title">Développer la présence en ligne</div>
+        <div class="comp-desc">Héberger, sécuriser et référencer des services web pour valoriser l'organisation.</div>
+        <span class="comp-arrow">→</span>
+      </a>
+      <a href="#projet-1" class="comp-card">
+        <div class="comp-code">C.04</div>
+        <div class="comp-title">Travailler en mode projet</div>
+        <div class="comp-desc">Analyser les objectifs, planifier les activités, collaborer et rendre compte de l'avancement.</div>
+        <span class="comp-arrow">→</span>
+      </a>
+      <a href="#projet-3" class="comp-card">
+        <div class="comp-code">C.05</div>
+        <div class="comp-title">Mettre à disposition un service informatique</div>
+        <div class="comp-desc">Déployer, tester et accompagner les utilisateurs dans la prise en main d'un service.</div>
+        <span class="comp-arrow">→</span>
+      </a>
+      <a href="#projet-2" class="comp-card">
+        <div class="comp-code">C.06</div>
+        <div class="comp-title">Organiser son développement professionnel</div>
+        <div class="comp-desc">Assurer une veille informationnelle et développer ses compétences en continu.</div>
+        <span class="comp-arrow">→</span>
+      </a>
+    </div>
+    <p class="comp-note">Cliquez sur une compétence pour accéder au projet associé.</p>
+  </div>
+</div>
+
+<!-- PROJETS -->
+<div class="section-wrap" id="projets">
+  <div class="section-divider"></div>
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Projets</h2>
+  </div>
+  <div class="projects-list">
+
+    <div class="project-item" id="projet-1">
+      <div>
+        <div class="project-date">Déc. 2024 — Jan. 2025</div>
+        <div class="project-org">Lycée Saint-Rémi</div>
+        <div class="project-comp-tags">
+          <span class="project-comp-tag">C.01</span>
+          <span class="project-comp-tag">C.04</span>
+          <span class="project-comp-tag">C.05</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="project-title">Infrastructure réseau locale</h3>
+        <p class="project-desc">Mise en place d'une infrastructure réseau complète en environnement scolaire, simulant un contexte professionnel : serveur, postes clients et administration des accès.</p>
+        <ul class="project-tasks">
+          <li>Installation et configuration d'un serveur local sous Windows Server et Linux</li>
+          <li>Mise en place d'un environnement réseau avec postes clients</li>
+          <li>Gestion des utilisateurs, groupes et droits d'accès</li>
+          <li>Découverte et configuration d'Active Directory</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-item" id="projet-2">
+      <div>
+        <div class="project-date">Jan. 2025 — Fév. 2025</div>
+        <div class="project-org">Lycée Saint-Rémi</div>
+        <div class="project-comp-tags">
+          <span class="project-comp-tag">C.01</span>
+          <span class="project-comp-tag">C.04</span>
+          <span class="project-comp-tag">C.05</span>
+          <span class="project-comp-tag">C.06</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="project-title">TP Sécurité Informatique</h3>
+        <p class="project-desc">Travaux pratiques axés sur l'identification des vulnérabilités courantes et la mise en œuvre de protections adaptées sur un réseau local.</p>
+        <ul class="project-tasks">
+          <li>Sensibilisation aux failles : phishing, mots de passe faibles, absence de pare-feu</li>
+          <li>Configuration d'un pare-feu et paramétrage d'un antivirus</li>
+          <li>Tests de sécurité sur réseau local</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-item" id="projet-3">
+      <div>
+        <div class="project-date">Mai 2025 — Juin 2025</div>
+        <div class="project-org">Vilogia</div>
+        <div class="project-comp-tags">
+          <span class="project-comp-tag">C.01</span>
+          <span class="project-comp-tag">C.03</span>
+          <span class="project-comp-tag">C.04</span>
+          <span class="project-comp-tag">C.05</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="project-title">Stage Service Infrastructure — Vilogia</h3>
+        <p class="project-desc">Stage au sein du service infrastructure d'un bailleur social national. Missions en scripting, sécurité web et migration d'hébergement cloud.</p>
+        <ul class="project-tasks">
+          <li>Développement d'un script PowerShell pour l'extraction automatisée des droits NTFS</li>
+          <li>Mise en place et configuration d'un WAF Cloudflare</li>
+          <li>Migration de sites web de Microsoft Azure vers Cloudflare</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-item" id="projet-4">
+      <div>
+        <div class="project-date">Mai 2025 — Juin 2025</div>
+        <div class="project-org">Okaïdi</div>
+        <div class="project-comp-tags">
+          <span class="project-comp-tag">C.02</span>
+          <span class="project-comp-tag">C.05</span>
+          <span class="project-comp-tag">C.06</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="project-title">Stage Service Support — Okaïdi</h3>
+        <p class="project-desc">Stage en service support utilisateur dans une enseigne de distribution nationale. Gestion du parc informatique, assistance aux utilisateurs et renouvellement des équipements.</p>
+        <ul class="project-tasks">
+          <li>Préparation de postes et déploiement par projection d'image système</li>
+          <li>Assistance et résolution d'incidents utilisateurs (helpdesk)</li>
+          <li>Participation au renouvellement du parc informatique</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FORMATION -->
+<div class="comp-bg" id="formation">
+  <div class="section-wrap">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Formation</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-row">
+        <div class="timeline-year">2020 — 2022</div>
+        <div>
+          <div class="timeline-title">Baccalauréat S</div>
+          <div class="timeline-sub">Spécialité Sciences de l'Ingénieur</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-year">2022 — 2023</div>
+        <div>
+          <div class="timeline-title">Licence Ingénierie Mécanique</div>
+          <div class="timeline-sub">Première année universitaire</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-year">2023 — 2024</div>
+        <div>
+          <div class="timeline-title">École en Cybersécurité</div>
+          <div class="timeline-sub">Première année — Sécurité des systèmes d'information</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-year">2024 — 2025</div>
+        <div>
+          <div class="timeline-title">BTS SIO — 1ère année</div>
+          <div class="timeline-sub">Option SISR — Lycée Saint-Rémi</div>
+        </div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-year">2025 — 2026</div>
+        <div>
+          <div class="timeline-title">BTS SIO — 2ème année <span class="timeline-current">En cours</span></div>
+          <div class="timeline-sub">Option SISR — Épreuve E5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">Travaillons<br><em>ensemble.</em></h2>
+    <div class="contact-links">
+      <a href="mailto:mikahil.lamblin@gmail.com" class="contact-row">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">mikahil.lamblin@gmail.com</span>
+      </a>
+      <a href="tel:0782372463" class="contact-row">
+        <span class="contact-label">Téléphone</span>
+        <span class="contact-value">07 82 37 24 63</span>
+      </a>
+    </div>
+  </div>
+  <footer>
+    <p>Mikahil Lamblin — Portfolio BTS SIO SISR</p>
+    <p>Épreuve E5 · 2025 – 2026</p>
+  </footer>
+</div>
+
+<script>
+  // Scroll reveal
+  const allReveal = document.querySelectorAll('.reveal, .project-item, .timeline-row');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  allReveal.forEach(el => observer.observe(el));
+
+  // Stagger delays
+  document.querySelectorAll('.timeline-row').forEach((row, i) => {
+    row.style.transitionDelay = `${i * 0.07}s`;
+  });
+  document.querySelectorAll('.project-item').forEach((item, i) => {
+    item.style.transitionDelay = `${i * 0.07}s`;
+  });
+
+  // Active nav
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => navObs.observe(s));
+</script>
+
+</body>
+</html>
